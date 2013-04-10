@@ -76,6 +76,11 @@ The meta style allows you to write functions like this
 
     end
 
+## License
+
+This code is currently copyrighted under the AGPL license.
+http://www.gnu.org/licenses/agpl.html
+
 ## Contributing
 
 1. Fork it
