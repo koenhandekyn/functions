@@ -270,6 +270,18 @@ module Functional
       fs.map { |f| f(f).(x) }
     end
 
+    def_method :even?
+
+    def_method :odd?
+
+    def divide(arr)
+      arr.inject { |a,b| a/b }
+    end
+
+    define :sum_length, as: { parallel: [:sum, :length] }
+
+    define :average, as: { :after => [ :sum_length, :divide ] }
+
     # TODO write with operator :& ?
     # def_reduce_left :intersect, ->(a,b) { a&b } # short
     # reduce_left :intersect, ->(a,b) { a&b } # longer

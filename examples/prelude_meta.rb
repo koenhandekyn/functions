@@ -24,13 +24,6 @@ module PreludeMetaUsage
 
   define :squares_quinquies, as: { map: :square }
 
-  def_method :even?
-
-  # same as above
-  # def even?(a)
-  #   a.even?
-  # end
-
   def_filter :evens, :even?
 
   # same as above
@@ -48,21 +41,13 @@ module PreludeMetaUsage
 
   define :sum_of_squares_tris, as: { compose: [:sum, :squares] }
 
-  def divide(arr)
-    arr.inject { |a,b| a/b }
-  end
-
-  def_parallel :sum_length, :sum, :length
-
-  def_after :average, :sum_length, :divide
-
   def average_bis(a)
     after([:sum, :length], :divide, a)
   end
 
   define :average_tris, as: { :after => [ :sum_length, :divide ] }
 
-  define :after => [ :sum_length, :divide ], as: :average_quater
+  def_after :average_quater, :sum_length, :divide
 
   def inc_with(f, n, m)
     m + f(f).(n)

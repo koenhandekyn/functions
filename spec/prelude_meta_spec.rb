@@ -1,46 +1,34 @@
-require 'functional'
+require "functional"
 
-include Functional::Prelude
+include Functional::PreludeMeta
 
-describe Functional::Prelude, "basic" do
+describe Functional::PreludeMeta, "basic meta prelude usage" do
 
-  Power = ->(p, x) { x**p }.curry
-  Square = Power.(2)
-  Squares = Map.(Square)
-
-  it "composes" do
-    sum_of_squares = Compose.(Sum).(Squares)
-    sum_of_squares.([2, 3, 4]).should eq(4+9+16)
+  it "sums" do
+    sum([1, 2, 3]).should == 1+2+3
   end
 
-  it "has a compose operator" do
-    sum_of_squares = Sum < Squares
-    sum_of_squares.([2, 3, 4]).should eq(4+9+16)
+  it "takes averages" do
+    average([2, 3, 8]).should == 4
   end
 
   it "folds" do
-    inc_with = ->(f, n, m) { n + f.(m) }.curry
-    sum_of = ->(f, arr) { Foldl.(inc_with.(f), 0, arr) }.curry
-    sum_of.(Square).([1,2,3]).should eq(1+4+9)
+    foldl(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0]).should == 1.0/1.0/2.0/3.0
+    foldr(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0]).should == 1.0/3.0/2.0/1.0
   end
 
-  it "composes using after with implicit parallel" do
-    average = After.([Sum, Length]).(Divide)
-    average.([2, 3, 8]).should eq((2+3+8)/3)
+  it "mins and maxes" do
+    min([1, 2, 3]).should == 1
+    max([1, 2, 3]).should == 3
   end
 
-  it "mixes parallel with after operator" do
-    average = Parallel.(Sum, Length) > Divide
-    average.([2, 3, 8]).should eq((2+3+8)/3)
+  it "makes ranges" do
+    from_to(2, 3).should == (2..3)
+    from_one_to(3).should == (1..3)
   end
 
-  it "mixes par with after operator" do
-    average = Par.([Sum, Length]) > Divide
-    average.([2, 3, 8]).should eq((2+3+8)/3)
-  end
-
-  it "flattens arrays" do
-    Flatten.([[1, 2, 3], [2, 3]]).should eq([1,2,3,2,3])
+  it "intersects arrays" do
+    intersect([[1, 2, 3], [2, 3, 4], [2, 3, 8]]).should == [2, 3]
   end
 
 end

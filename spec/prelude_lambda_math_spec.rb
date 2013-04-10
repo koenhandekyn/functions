@@ -1,4 +1,4 @@
-require 'functional/prelude_lambda'
+require 'functional'
 
 include Functional::Prelude
 
@@ -26,10 +26,6 @@ describe Functional::Prelude, "math" do
     Gcd.(4,8).should eq(4)
     GcdA.([12,9,6]).should eq(3)
     GcdA.([4,8,2]).should eq(2)
-    # test variant implementations
-    GcdA1.([4,8,2]).should eq(2)
-    GcdA2.([4,8,2]).should eq(2)
-    GcdA3.([4,8,2]).should eq(2)
   end
 
   it "knows about lcm" do
@@ -37,9 +33,6 @@ describe Functional::Prelude, "math" do
     Lcm.(6,8).should eq(24)
     LcmA.([12,9]).should eq(36)
     LcmA.([12,9,2]).should eq(36)
-    # test variant implementations
-    LcmA1.([12,9,2]).should eq(36)
-    LcmA2.([12,9,2]).should eq(36)
   end
 
 end
