@@ -47,13 +47,13 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_compose :compose
+      #alias :def_compose :compose
 
       def after(c, f, g)
         compose(c, g, f)
       end
 
-      alias :def_after :after
+      #alias :def_after :after
 
       def parallel(c, f, g)
         m = create_proc_method(c, f, :f)
@@ -66,7 +66,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_parallel :parallel
+      #alias :def_parallel :parallel
 
       def foldl(c, f, i)
         m = create_proc_method(c, f)
@@ -78,7 +78,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_foldl :foldl
+      #alias :def_foldl :foldl
 
       def reduce_left(c, f)
         m = create_proc_method(c, f)
@@ -90,7 +90,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_reduce_left :reduce_left
+      #alias :def_reduce_left :reduce_left
 
       def foldr(c, f, i)
         m = create_proc_method(c, f)
@@ -102,7 +102,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_foldr :foldr
+      #alias :def_foldr :foldr
 
       def reduce_right(c, f)
         m = create_proc_method(c, f)
@@ -114,7 +114,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_reduce_right :reduce_right
+      #alias :def_reduce_right :reduce_right
 
       def map(c, f)
         m = create_proc_method(c, f)
@@ -126,7 +126,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_map :map
+      #alias :def_map :map
 
       def filter(c, f)
         m = create_proc_method(c, f)
@@ -138,7 +138,7 @@ module Functions
         module_eval(code)
       end
 
-      alias :def_filter :filter
+      #alias :def_filter :filter
 
       def method(m)
         code = %Q{

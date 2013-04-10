@@ -4,50 +4,41 @@ module PreludeMetaUsage
 
   include Functions::PreludeMeta
 
-  def power(x, p)
-    x ** p
-  end
+  def power(x, p) x ** p end
 
-  def square(x)
-    power(x, 2)
-  end
+  def square(x) power(x, 2) end
 
-  def_map :squares, :square
+  def squares(a) map(a, :square) end
 
-  def squares_bis(a)
-    map(a, :square)
-  end
+  define :squares_bis, as: { map: :square }
 
-  def_map :squares_tris, ->(x) { x**2 }
+  # def_map :squares, :square
 
-  define :squares_quater, as: { map: ->(x) { x**2 } }
+  # def_map :squares_tris, ->(x) { x**2 }
 
-  define :squares_quinquies, as: { map: :square }
+  # define :squares, as: { map: ->(x) { x**2 } }
 
-  def_filter :evens, :even?
+  define :evens, as: { filter: :even? }
 
-  # same as above
+  # def_filter :evens, :even?
+
   # filter :evens, :even?
 
-  def_filter :odds, ->(x) { ! x.even? }
+  define :odds, as: { filter: :odd? }
 
-  define :evens_bis, as: { filter: :even? }
+  # def_filter :odds, ->(x) { ! x.even? }
 
-  def_compose :sum_of_squares, :sum, :squares
+  def sum_of_squares(a) compose(:sum, :squares, a) end
 
-  def sum_of_squares_bis(a)
-    compose(:sum, :squares, a)
-  end
+  define :sum_of_squares_bis, as: { compose: [:sum, :squares] }
 
-  define :sum_of_squares_tris, as: { compose: [:sum, :squares] }
+  # compose :sum_of_squares, :sum, :squares
 
-  def average_bis(a)
-    after([:sum, :length], :divide, a)
-  end
+  def average_bis(a) after([:sum, :length], :divide, a) end
 
   define :average_tris, as: { :after => [ :sum_length, :divide ] }
 
-  def_after :average_quater, :sum_length, :divide
+  # after :average_quater, :sum_length, :divide
 
   def inc_with(f, n, m)
     m + f(f).(n)
@@ -63,7 +54,7 @@ module PreludeMetaUsage
     a+b
   end
 
-  def_foldl :sum_bis, :add, 0
+  foldl :sum_bis, :add, 0
 
   define :sum_tris, as: { foldl: [:add, 0]}
 
