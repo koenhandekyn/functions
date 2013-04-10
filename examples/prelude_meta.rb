@@ -1,8 +1,8 @@
-require 'functional'
+require 'functions'
 
 module PreludeMetaUsage
 
-  include Functional::PreludeMeta
+  include Functions::PreludeMeta
 
   def power(x, p)
     x ** p

@@ -24,9 +24,12 @@ describe PreludeLambdaUsage, "basic lambda prelude usage" do
 
   it "knows about GCD alternatives" do
     # test variant implementations
+    Gcd1.(4,8).should == 4
+    Gcd2.(4,8).should == 4
     GcdA1.([4,8,2]).should eq(2)
     GcdA2.([4,8,2]).should eq(2)
     GcdA3.([4,8,2]).should eq(2)
+    GcdA4.([4,8,2]).should eq(2)
   end
 
   it "knows about LCM variations" do

@@ -13,7 +13,7 @@ include PreludeMetaUsage
 
 class TestPrelude < MiniTest::Unit::TestCase
 
-  include Functional::Prelude
+  include Functions::Prelude
 
   def test_sum_of_squares
     assert_performance_linear 0.99 do |n| # n is a range value

@@ -1,6 +1,10 @@
-module Functional
+module Functions
 
   module Prelude
+
+    Max = Send.(:max)
+
+    Min = Send.(:min)
 
     Sum = ->(arr) { arr.inject(0, :+) }
 

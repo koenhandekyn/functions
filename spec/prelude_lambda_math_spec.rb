@@ -1,8 +1,8 @@
-require 'functional'
+require 'functions'
 
-include Functional::Prelude
+include Functions::Prelude
 
-describe Functional::Prelude, "math" do
+describe Functions::Prelude, "math" do
 
   it "divides" do
     Divide.([9,2]).should eq(9/2)

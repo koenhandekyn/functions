@@ -1,8 +1,8 @@
-require "functional"
+require 'functions'
 
-include Functional::PreludeMeta
+include Functions::PreludeMeta
 
-describe Functional::PreludeMeta, "basic meta prelude usage" do
+describe Functions::PreludeMeta, "basic meta prelude usage" do
 
   it "sums" do
     sum([1, 2, 3]).should == 1+2+3

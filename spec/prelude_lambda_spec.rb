@@ -1,8 +1,8 @@
-require 'functional'
+require 'functions'
 
-include Functional::Prelude
+include Functions::Prelude
 
-describe Functional::Prelude, "basic" do
+describe Functions::Prelude, "basic" do
 
   Power = ->(p, x) { x**p }.curry
   Square = Power.(2)

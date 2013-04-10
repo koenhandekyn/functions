@@ -1,4 +1,4 @@
-module Functional
+module Functions
 
   module Prelude
 
@@ -28,7 +28,7 @@ module Functional
     Compose = ->(f, g, x) { f.(g.(x)) }.curry
 
     # Manually curried version
-    ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
+    # ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
 
     After = ->(f, g, x) {
       f = Par.(f) if Array === f;
@@ -37,11 +37,11 @@ module Functional
     }.curry
 
     # Manually Curried Version
-    AfterCurried = ->(f) { ->(g) { ->(x) {
-      f = Par.(f) if Array === f;
-      g = Par.(g) if Array === g;
-      g.(f.(x))
-    } } }
+    # AfterCurried = ->(f) { ->(g) { ->(x) {
+    #  f = Par.(f) if Array === f;
+    #  g = Par.(g) if Array === g;
+    #  g.(f.(x))
+    # } } }
 
     Send = ->(m, o) { o.send(m) }.curry
 
@@ -72,13 +72,7 @@ module Functional
 
     Par = ->(fs, x) { fs.map { |f| f.(x) } }.curry
 
-    # todo translate to basic
     Intersect = ->(as) { as.inject(:&) }
-
-    # todo translate to basic
-    Max = Send.(:max)
-
-    Min = Send.(:min)
 
     FromTo = ->(from) { ->(to) { Range.new(from, to) } }
 

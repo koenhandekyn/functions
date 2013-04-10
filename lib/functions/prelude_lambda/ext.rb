@@ -1,13 +1,6 @@
 # reference http://iain.nl/going-crazy-with-to_proc
 
 class Array
-  # prepend element a to the array (self)
-  def >> a
-    self.unshift a
-  end
-end
-
-class Array
   # converts the array into a Proc where
   # the first element is the method name, other elements are the values
   def to_proc

@@ -1,4 +1,4 @@
-module Functional
+module Functions
 
   module PreludeMeta
 
@@ -246,9 +246,7 @@ module Functional
       foldl(f(f), i, a.reverse)
     end
 
-    def zip(a, b)
-      a.zip(b)
-    end
+    def zip(a, b) a.zip(b) end
 
     def map(a, f)
       a.map { |x| f(f).(x) }

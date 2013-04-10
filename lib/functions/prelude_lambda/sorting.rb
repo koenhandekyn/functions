@@ -1,4 +1,5 @@
-module Functional
+module Functions
+
   module Prelude
 
     Merge_Sort_By = ->(f, xs) do
