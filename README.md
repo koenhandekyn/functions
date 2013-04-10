@@ -79,7 +79,9 @@ The meta style allows you to write functions like this
 ## License
 
 This code is currently copyrighted under the AGPL license.
-http://www.gnu.org/licenses/agpl.html
+See <http://www.gnu.org/licenses/agpl.html> for more information.
+
+![AGPL license](http://www.gnu.org/graphics/agplv3-155x51.png)
 
 ## Contributing
 
