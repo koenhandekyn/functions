@@ -39,10 +39,10 @@ The lambda style allows you to write functions like this
 
       Average = After.( [Sum,Length] ).( Divide )
 
-      Gcd = ->(a,b) { (Divisors.(a) & Divisors.(b)).max }  # litteral translation of the definition, just as an example
+      Gcd = ->(a,b) { (Divisors.(a) & Divisors.(b)).max }  # literal translation of the definition, just as an example
 
       # Gcd of an array
-      GcdA1 = Max < Intersect < Map.(Divisors) # litteral translation of the definition
+      GcdA1 = Max < Intersect < Map.(Divisors) # literal translation of the definition
       GcdA2 = ReduceLeft.(Gcd) # faster
 
       # Lcm of an array in function of Lcm of a pair
