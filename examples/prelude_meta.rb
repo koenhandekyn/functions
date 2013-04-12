@@ -4,20 +4,23 @@ module PreludeMetaUsage
 
   include Functions::PreludeMeta
 
+  # returns x to the power of p
   def power(x, p) x ** p end
 
+  # returns x^2
   def square(x) power(x, 2) end
 
+  # returns the list of the squares
   def squares(a) map(a, :square) end
 
   define :squares_bis, as: { map: :square }
 
+  # test
   # def_map :squares, :square
-
   # def_map :squares_tris, ->(x) { x**2 }
-
   # define :squares, as: { map: ->(x) { x**2 } }
 
+  # returns all elements of an enumerable that are even
   define :evens, as: { filter: :even? }
 
   # def_filter :evens, :even?
@@ -40,24 +43,16 @@ module PreludeMetaUsage
 
   # after :average_quater, :sum_length, :divide
 
-  def inc_with(f, n, m)
-    m + f(f).(n)
-  end
+  def inc_with(f, n, m) m + f(f).(n) end
 
-  # can this be improved on ?
-  # a definition as composition ?
-  def sum_of(f, a)
-    a.inject(0) { |r, x| r + f(f).(x) }
-  end
+  def sum_of(f, a) a.inject(0) { |r, x| r + f(f).(x) } end
 
-  def add(a,b)
-    a+b
-  end
+  def add(a,b) a+b end
 
-  foldl :sum_bis, :add, 0
+  define :sum_bis, as: { foldl: [:add, 0]}
 
-  define :sum_tris, as: { foldl: [:add, 0]}
+  # foldl :sum_bis, :add, 0
 
-  define foldl: [:add, 0], as: :sum_quater
+  # define foldl: [:add, 0], as: :sum_quater
 
 end

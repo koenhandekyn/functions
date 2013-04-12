@@ -222,21 +222,21 @@ module Functions
 
     def_method :flatten
 
-    #def flatten(a)
-    #  a.flatten
-    #end
-
+    # @return calls the length method on the object
     def_method :length
 
-    #def length(a)
-    #  a.length
-    #end
-
+    # @param object the target object
+    # @return calls the reverse method on the object
     def_method :reverse
 
-    #def reverse(a)
-    #  a.reverse
-    #end
+    # @param object [#min] the object to call the min method on
+    # @return calls the min method on the Enumerable
+    def_method :min
+
+    # @param [#max] the object to call the max method on
+    # @return [Integer] the maximum
+    def_method :max
+
 
     def foldl(f, i, a)
       a.inject(i) { |r, x| f(f).(r, x) }
@@ -280,15 +280,12 @@ module Functions
 
     define :average, as: { :after => [ :sum_length, :divide ] }
 
-    # TODO write with operator :& ?
-    # def_reduce_left :intersect, ->(a,b) { a&b } # short
-    # reduce_left :intersect, ->(a,b) { a&b } # longer
     define :intersect, as: {reduce_left: ->(a, b) { a&b }} # longest
 
-    def_method :min
-
-    def_method :max
-
+    # creates a range
+    #
+    # param from [Fixnum] the start of the range
+    # param to [Fixnum] the end of the range
     def from_to(from, to)
       Range.new(from, to)
     end

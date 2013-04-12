@@ -14,15 +14,15 @@ describe PreludeMetaUsage, "basic meta prelude usage" do
     odds([1, 2, 3, 4, 5]).should == [1, 3, 5]
   end
 
-  it "takes sums of squares and more" do
-    sum_of_squares([2, 3, 4]).should == 2*2+3*3+4*4
-    sum_of_squares_bis([2, 3, 4]).should == 2*2+3*3+4*4
+  it "takes sums of squares" do
     sum_of(:square, [2, 3, 1]).should == 2*2+3*3+1*1
     sum_of(->(x) { x*x }, [2, 3, 1]).should == 2*2+3*3+1*1
-    sum([1, 2, 3]).should == 1+2+3
+    sum_of_squares([2, 3, 4]).should == 2*2+3*3+4*4
+    sum_of_squares_bis([2, 3, 4]).should == 2*2+3*3+4*4
+  end
+
+  it "takes sums by some variant definitions" do
     sum_bis([1, 2, 3]).should == 1+2+3
-    sum_tris([1, 2, 3]).should == 1+2+3
-    sum_quater([1, 2, 3]).should == 1+2+3
   end
 
   it "takes averages by some variant definitions" do

@@ -2,14 +2,20 @@ module Functions
 
   module Prelude
 
+    # the identity function
     Id = ->(x) { x }
 
+    # the constant function
     Const = ->(c, x) { c }
 
+    # splits a list xs in peices of size n
     Split_In = ->(n, xs) { xs.each_slice((xs.length+1)/n).to_a }
 
+    # splits a list in half
     Split_In_Half = Split_In.curry.(2)
 
+    # merges two lists by a function f that compares the values
+    # if no function is given the values are compared by the "<" operator
     Merge_By = ->(f, xs, ys) do
 
       return xs if ys.empty?
@@ -23,37 +29,49 @@ module Functions
 
     end
 
+    # merges two list by the natural comparison operator <
     Merge = Merge_By.partial(nil)
 
+    # composes two functions
     Compose = ->(f, g, x) { f.(g.(x)) }.curry
 
-    # Manually curried version
-    # ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
+    # manually curried version of the Compose function
+    ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
 
+    # composes two functions in reverse sequence
     After = ->(f, g, x) {
       f = Par.(f) if Array === f;
       g = Par.(g) if Array === g;
       g.(f.(x))
     }.curry
 
-    # Manually Curried Version
-    # AfterCurried = ->(f) { ->(g) { ->(x) {
-    #  f = Par.(f) if Array === f;
-    #  g = Par.(g) if Array === g;
-    #  g.(f.(x))
-    # } } }
+    # manually curried Version of the After composition function
+    AfterCurried = ->(f) { ->(g) { ->(x) {
+      f = Par.(f) if Array === f;
+      g = Par.(g) if Array === g;
+      g.(f.(x))
+    } } }
 
+    # sends the message m to an object o
+    #
+    # @param [Symbol] the method to be called on the object o
+    # @return the result of calling the message m on the object o
     Send = ->(m, o) { o.send(m) }.curry
 
+    # Flattens an array
+    #
+    # @param [#flatten] the array to flatten
     Flatten = Send.(:flatten)
-    # Flatten = ->(a) { a.flatten }
 
+    # Reverses an array
+    #
+    # @param [#reverse] the array to reverse
     Reverse = Send.(:reverse)
-    # Reverse = ->(a) { a.reverse }
 
+    # Returns the length
     Length = Send.(:length)
-    # Length = ->(x) { x.length }
 
+    #
     Foldl = ->(f, i, a) { a.inject(i) { |r, x| f.(r, x) } }.curry
 
     ReduceLeft = ->(f, a) { a.inject { |r, x| f.(r, x) } }.curry
