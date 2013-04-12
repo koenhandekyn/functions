@@ -43,4 +43,10 @@ describe Functions::Prelude, "basic" do
     Flatten.([[1, 2, 3], [2, 3]]).should eq([1,2,3,2,3])
   end
 
+  it "sorts arrays" do
+    Quick_Sort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
+    Quick_Sort.([1,1,1,1,1,1,1]).should == [1,1,1,1,1,1,1]
+    Merge_Sort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
+  end
+
 end
