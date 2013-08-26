@@ -1,6 +1,7 @@
 # Functional
 
 This library facilitates writing code in a more functional style inside Ruby.
+How this is fun.
 
 ## Installation
 
