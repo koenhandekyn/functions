@@ -16,7 +16,7 @@ module Functions
 
     IsDivisor = ->(a, c) { a % c == 0 }
 
-    Divisors = ->(a) { Filter.(FromOneTo.(a), IsDivisor.partial(a)) }
+    Divisors = ->(a) { Filter.(IsDivisor.partial(a), FromOneTo.(a)) }
 
     Gcd = ->(a, b) { b == 0 ? a : Gcd.(b, a % b) } # euclid algorithm
 

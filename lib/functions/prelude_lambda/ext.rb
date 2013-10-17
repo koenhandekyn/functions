@@ -10,6 +10,9 @@ class Array
 end
 
 class Proc
+  def self.compose(f, g)
+    ->(*args) { g[f[*args]] }
+  end
   # Composition of Procs (functions): (f+g)(x) = f(g(x))
   def +(g)
     # Prelude::Compose.(self,g)

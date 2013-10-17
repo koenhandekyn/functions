@@ -84,7 +84,7 @@ module Functions
 
     Map = ->(f, a) { a.map { |x| f.(x) } }.curry
 
-    Filter = ->(xs, f) { xs.select { |x| f.(x) } }.curry
+    Filter = ->(f, xs) { xs.select { |x| f.(x) } }.curry
 
     Parallel = ->(f, g, x) { [f.(x), g.(x)] }.curry
 
