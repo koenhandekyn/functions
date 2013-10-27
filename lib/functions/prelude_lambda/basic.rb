@@ -105,6 +105,7 @@ module Functions
 
     Values = Send.(:values)
 
+    # TODO investigate semantics
     Partition = ->(f) { Group.(f) > Values } 
 
     FromTo = ->(from) { ->(to) { Range.new(from, to) } }
