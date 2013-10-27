@@ -24,11 +24,12 @@ describe "enumerable" do
     [1,2,3].split_in(1).should eq([[1,2,3]])
     [1,2,3].split_in(2).should eq([[1,2],[3]])
     [1,2,3].split_in(3).should eq([[1],[2],[3]])
-    [1,2,3].split_in(4).should eq([[1],[2],[3],[]]) # do we want this ? or lenght 4 ?
+    [1,2,3].split_in(4).should eq([[1],[2],[3],[]]) # do we want this ? length 3 ? or lenght 4 ?
     [1,2,3].split_in_half.should eq([[1,2],[3]])
   end
 
   it "merge" do
+    # starts with ordered sets
     [1,3,5].merge([3,4,8]).should eq([1,3,3,4,5,8])
     [1,3,5].merge([2]).should eq([1,2,3,5])
     [].merge([1,2,3]).should eq([1,2,3])
@@ -61,11 +62,6 @@ describe "enumerable" do
   it "grouped" do
     [1,2,3,2,2,1,2].grouped { |x| x.odd? }.should eq([[1,3,1],[2,2,2,2]])
     %w(some words are longer then others).grouped { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
-  end
-
-  it "partition" do
-    abcd = {a: 1, b: 2, c: 3, d: 4}
-    abcd.partition { |x| }
   end
 
 end
