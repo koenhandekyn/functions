@@ -14,7 +14,7 @@ module Functions
     # splits a list in half
     Split_In_Half = Split_In.curry.(2)
 
-    # merges two lists by a function f that compares the values
+    # merges two ordered lists by a function f that compares the values
     # if no function is given the values are compared by the "<" operator
     Merge_By = ->(f, xs, ys) do
 
@@ -71,7 +71,6 @@ module Functions
     # Returns the length
     Length = Send.(:length)
 
-    #
     Foldl = ->(f, i, a) { a.inject(i) { |r, x| f.(r, x) } }.curry
 
     ReduceLeft = ->(f, a) { a.inject { |r, x| f.(r, x) } }.curry
@@ -82,7 +81,17 @@ module Functions
 
     Zip = ->(a, b) { a.zip(b) }.curry
 
+    Merge_Hash = ->(as, bs) { as.merge(bs) { |k, a, b| [a, b] } }.curry
+
+    Zip_Hash_Left = ->(as, bs) { as.each_with_object({}) { |(k, a), h| h[k] = [a, bs[k]]; h } }.curry
+
+    Zip_Hash_Inner = ->(as, bs) { as.each_with_object({}) { |(k, a), h| b = bs[k]; h[k] = [a, b] if b; h } }.curry
+
+    Zip_Hash_Right = ->(as, bs) { bs.each_with_object({}) { |(k, b), h| h[k] = [as[k], b]; h } }.curry
+
     Map = ->(f, a) { a.map { |x| f.(x) } }.curry
+
+    Map_Hash = ->(f, h) { Hash[h.map{|k, v| [k, f.(v)] }] }.curry     
 
     Filter = ->(f, xs) { xs.select { |x| f.(x) } }.curry
 
@@ -92,9 +101,21 @@ module Functions
 
     Intersect = ->(as) { as.inject(:&) }
 
+    Group = ->(f,a) { a.group_by(&f) }.curry 
+
+    Values = Send.(:values)
+
+    Partition = ->(f) { Group.(f) > Values } 
+
     FromTo = ->(from) { ->(to) { Range.new(from, to) } }
 
     FromOneTo = FromTo.(1)
+
+    Count_By = ->(f,a) { a.inject( Hash.new(0) ) { |h,e| h[f.(e)] += 1; h } }.curry
+    # count_by = ->(f) { group_by.( f ) < map_hash.( send.(:length) ) }    
+    
+    Count = ->(a) { a.inject( Hash.new(0) ) { |h,e| h[e] += 1; h } } # probably a bit faster   
+    # count = count_by.(identity) # alternative definition (generic)
 
   end
 

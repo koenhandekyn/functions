@@ -49,4 +49,13 @@ describe Functions::Prelude, "basic" do
     Merge_Sort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
   end
 
+  it "merges hashes" do
+    a = { a: 'a', b: 'b' }
+    b = { a: '1', c: '3' }
+    Merge_Hash.(a,b).should == { a: ['a','1'], b: 'b', c: '3' }
+    Zip_Hash_Left.(a,b).should == { a: ['a','1'], b: ['b', nil] } 
+    Zip_Hash_Right.(a,b).should == { a: ['a','1'], c: [nil, '3'] } 
+    Zip_Hash_Inner.(a,b).should == { a: ['a','1'] } 
+  end
+
 end

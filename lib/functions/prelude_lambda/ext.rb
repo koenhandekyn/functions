@@ -16,17 +16,17 @@ class Proc
   # Composition of Procs (functions): (f+g)(x) = f(g(x))
   def +(g)
     # Prelude::Compose.(self,g)
-    ->(x) { self.(g.(x)) }
+    ->(*x) { self.(g.(*x)) }
   end
   # Composition of Procs (functions): (f<g)(x) = f(g(x))
   def <(g)
     # Prelude::Compose.(self,g)
-    ->(x) { self.(g.(x)) }
+    ->(*x) { self.(g.(*x)) }
   end
   # Composition of Procs (functions): (f>g)(x) = g(f(x))
   def >(g)
     # Prelude::After.(self,g)
-    ->(x) { g.(self.(x)) }
+    ->(*x) { g.(self.(*x)) }
   end
   # Partial evaluation of a Proc (function)
   def partial(a)
