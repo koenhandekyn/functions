@@ -4,12 +4,17 @@ module Enumerable
     self.zip(*lists).map(&b)
   end
 
-  # TODO study to understand
-  def transpose
-    self.with_index do |i| 
-      yield self.with_object(i).map &:[]
-    end
-  end  
+  def unzip
+    self.transpose
+  end
+
+  # # TODO study to understand
+  # # it seems it's build in :)
+  # def transpose
+  #   self.with_index do |i| 
+  #     yield self.with_object(i).map &:[]
+  #   end
+  # end  
 
   # splits a list xs in n peices
   def split_in(n) 
@@ -24,6 +29,9 @@ module Enumerable
     self.inject( Hash.new(0) ) { |h,e| h[e] += 1; h } 
   end
 
+  def grouped &f
+    self.group_by(&f).values
+  end
 
   # merges two ordered lists by a function f that compares the values
   # if no function is given the values are compared by the "<" operator
