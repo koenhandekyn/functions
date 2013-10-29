@@ -68,7 +68,7 @@ describe "enumerable" do
     ['a','b','a','d'].counted_set.should eq({'a' => 2, 'b' => 1, 'd' => 1})
   end
 
-  it "grouped" do
+  it "grouped_by" do
     [1,2,3,2,2,1,2].grouped_by { |x| x.odd? }.should eq([[1,3,1],[2,2,2,2]])
     %w(some words are longer then others).grouped_by { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
   end

@@ -9,6 +9,12 @@ describe Functions::Prelude, "math" do
     Divide.([8,2,2]).should eq(8/2/2)
   end
 
+  it "power" do
+    Power.(2,3).should eq(9)
+    Power.(0,3).should eq(1)
+    Power.(3,2).should eq(8)
+  end
+
   it "knows about divisors" do
     IsDivisor.(8,2).should eq(true)
     IsDivisor.(8,3).should eq(false)

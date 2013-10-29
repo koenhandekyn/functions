@@ -12,5 +12,4 @@ class Hash
     Hash[self.map{|k, v| [k, yield(v)] }]
   end
 
-
 end

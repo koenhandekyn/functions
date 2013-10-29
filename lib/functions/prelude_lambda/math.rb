@@ -14,6 +14,8 @@ module Functions
 
     Average = Parallel.(Sum,Length) > Divide
 
+    Power = ->(p,x) { x**p }.curry
+
     IsDivisor = ->(a, c) { a % c == 0 }
 
     Divisors = ->(a) { Filter.(IsDivisor.partial(a), FromOneTo.(a)) }
