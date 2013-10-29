@@ -1,7 +1,6 @@
 # Functional
 
-This library facilitates writing code in a more functional style inside Ruby.
-How this is fun.
+This library facilitates writing code in a more functional style inside Ruby. 
 
 ## Installation
 
@@ -18,12 +17,6 @@ Or install it yourself as:
     $ gem install functional
 
 ## Usage
-
-The library provides two different styles.
-One style builds on Lambda's and another style uses meta-programming.
-The lambda style is a bit more pure but is currently just a bit slower in performance.
-
-### Lambda Style
 
 The lambda style allows you to write functions like this
 
@@ -48,32 +41,6 @@ The lambda style allows you to write functions like this
 
       # Lcm of an array in function of Lcm of a pair
       LcmA = ReduceLeft.(Lcm) # the same but without arguments
-
-    end
-
-### Meta Style
-
-The meta style allows you to write functions like this
-
-    require 'functions'
-
-    module PreludeMetaUsage
-
-      include Functions::PreludeMeta
-
-      def power(x, p) x ** p end
-
-      def square(x) power(x, 2) end
-
-      define :squares, as: { map: :square }
-
-      define :evens, as: { filter: :even? }
-
-      define :sum_of_squares_tris, as: { compose: [:sum, :squares] }
-
-      define :average, as: { :after => [ :sum_length, :divide ] }
-
-      define :sum, as: { foldl: [:add, 0]}
 
     end
 

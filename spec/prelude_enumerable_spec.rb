@@ -14,7 +14,7 @@ describe "enumerable" do
     [[1,2,3],[:a,:b,:c]].transpose.should eq([[1,:a],[2,:b],[3,:c]])
   end
 
-  it "zips and unzips" do
+  it "zip, unzip" do
     ns = [1,2,3]
     as = [:a,:b,:c]
     ns.zip(as).unzip.should eq([ns, as])
@@ -34,6 +34,15 @@ describe "enumerable" do
     [1,3,5].merge([2]).should eq([1,2,3,5])
     [].merge([1,2,3]).should eq([1,2,3])
     [1,2,3].merge([]).should eq([1,2,3])
+    [3,2,1].merge([4,2,1]) { |a,b| a > b }.should eq([4,3,2,2,1,1])
+  end
+
+  it "interleave" do
+    %w(sex druggs rock roll).interleave([", "," and "," & "]).join("").should eq("sex, druggs and rock & roll")
+    [3,1,4].interleave([:a,:d,:b]).should eq([3,:a,1,:d,4,:b])
+    [3,1,4].interleave([:a,:d]).should eq([3,:a,1,:d,4])
+    [3,1,4].interleave([:a]).should eq([3,:a,1,4])
+    [3,1,4].interleave([]).should eq([3,1,4])
   end
 
   it "zip_hash" do
@@ -60,8 +69,8 @@ describe "enumerable" do
   end
 
   it "grouped" do
-    [1,2,3,2,2,1,2].grouped { |x| x.odd? }.should eq([[1,3,1],[2,2,2,2]])
-    %w(some words are longer then others).grouped { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
+    [1,2,3,2,2,1,2].grouped_by { |x| x.odd? }.should eq([[1,3,1],[2,2,2,2]])
+    %w(some words are longer then others).grouped_by { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
   end
 
 end
