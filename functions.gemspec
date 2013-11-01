@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{functional programming in ruby}
   gem.summary       = %q{functional programming in ruby}
   gem.homepage      = "https://github.com/koenhandekyn/functions"
-
+  gem.license       = 'AGPL'
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
