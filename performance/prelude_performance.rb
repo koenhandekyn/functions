@@ -1,9 +1,10 @@
+$LOAD_PATH << 'lib' # File.expand_path( File.dirname(__FILE__) + '/../lib' )
+
 require_relative '../examples/prelude_lambda'
 
-include PreludeLambdaUsage
-# include PreludeUsageWithDefs
-
 require 'benchmark'
+
+include PreludeLambdaUsage
 
 [10, 100, 1000, 10000].each do |n|
   Benchmark.bm(40) do |b|

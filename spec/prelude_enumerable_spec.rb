@@ -57,10 +57,58 @@ describe "enumerable" do
     ad.zip_hash_inner(cb).should eq({})
   end
 
+  it "map_values" do
+    ab = {a: 1, b: 2}
+    ab.map_values { |x| x*2}.should == {a: 2, b: 4}
+    ab.map_values { |x| x.even? }.should == {a: false, b: true}
+  end
+
+  it "map_values_recurse" do
+    abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
+    abcde.map_values_recurse { |x| x*2}.should == {a: 2, b: 4, c: { d: 2, e: 0}}
+    abcde .map_values_recurse { |x| x.even? }.should == {a: false, b: true, c: { d:false, e: true}}
+  end
+
+  it "map_keys" do
+    ab = {a: 1, b: 2}
+    ab.map_keys { |k| k.to_s }.should == {"a" => 1, "b" => 2}
+    ab.map_keys { |k| k.to_s[0].ord }.should == { 97 => 1, 98 => 2 }
+    ab.map_keys { |k| k.to_s.length }.should == { 1 => 2 }
+  end
+
+  it "map_keys_recurse" do
+    abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
+    abcde.map_keys_recurse { |k| k.to_s }.should == {"a" => 1, "b" => 2, "c" => { "d" => 1, "e" => 0 }}
+  end
+
   it "map_hash" do
     ab = {a: 1, b: 2}
-    ab.map_hash { |x| x*2}.should eq({a: 2, b: 4})
-    ab.map_hash { |x| x.even? }.should eq({a: false, b: true})
+    ab.map_hash { |k,v| [k.to_s, v*2] }.should == {"a" => 2, "b" => 4}
+    ab.map_hash { |k,v| [k.to_s[0].ord, v.even?] }.should == {97 => false, 98 => true}
+    ab.map_hash { |k,v| [k.to_s.length, v.even?] }.should == {1 => true}
+  end
+
+  it "map_recursive" do
+    abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
+    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s, v] : [k.to_s, v*2] }.should == {"a" => 2, "b" => 4, "c" => { "d" => 2, "e" => 0 }}
+    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s[0].ord, v] : [k.to_s[0].ord, v.even?] }.should == {97 => false, 98 => true, 99 => { 100 => false, 101 => true }}
+    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s.length, v] : [k.to_s.length, v.even?] }.should == {1 => true, 1 => { 1=>true } }
+  end
+
+  it "map_keys_and_values" do
+    
+    s = ->(x) { x.to_s }
+    s_ord = ->(x) { x.to_s[0].ord }
+    s_length = ->(x) { x.to_s.length }
+    times_2 = ->(x) { x * 2 }
+    even = ->(x) { x.even? }
+    
+    abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
+
+    abcde.map_keys_and_values(s, times_2).should == {"a" => 2, "b" => 4, "c" => { "d" => 2, "e" => 0 }}
+    abcde.map_keys_and_values(s_ord, even).should == {97 => false, 98 => true, 99 => { 100 => false, 101 => true }}
+    abcde.map_keys_and_values(s_length, even).should == {1 => true, 1 => { 1=>true } }
+
   end
 
   it "counted_set" do
@@ -73,4 +121,23 @@ describe "enumerable" do
     %w(some words are longer then others).grouped_by { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
   end
 
+  it "multimap" do
+
+    folders = { 'main[2]' => { 'child[3]' => 'leaf', 'simple' => 'leaf' } }
+
+    multiply_folder = -> (k,v) do
+      match = k.match(/(.*)\[(\d+)\]/)
+      k, count = match ? [match[1], match[2].to_i] : [k, nil]
+      if count
+        (1..count).map { |i| ["#{k}_#{i}",v] }
+      else
+        [[k,v]]
+      end
+    end
+
+    multiplied = folders.multi_map &multiply_folder
+    multiplied.length.should eq(2)
+    multiplied['main_1'].length.should eq(4)
+
+  end
 end
