@@ -16,13 +16,6 @@ class Hash
     Hash[self.map{|k, v| [k, v.is_a?(Hash) ? v.map_values_recurse(&b) : b.(v)] }]
   end
 
-  #  definition of maarten
-  #  def map_values &blk
-  #    res = {}
-  #    each {|k,v| res[k] = blk.call(v)}
-  #    res
-  #  end
-
   # TODO discuss if we should not map onto array as values can colide
   def map_keys
     Hash[self.map{|k, v| [yield(k), v] }]
@@ -32,21 +25,6 @@ class Hash
     Hash[self.map{|k, v| [b.(k), v.is_a?(Hash) ? v.map_keys_recurse(&b) : v ] }]
   end
 
-  # def map_keys
-  #   each_with_object({}) { |h, (k,v)| h[yield(k)] = v }  
-  # end
-
-  # def map_keys &blk
-  #   each_with_object({}) {|h, (k,v)| h[blk.(k)] = v}  
-  # end
-
-  # definition of maarten
-  # def map_keys &blk
-  #   res = {}
-  #   each {|k,v| res[blk.call(k)] = v}
-  #   res
-  # end
-
   # map a hash into a hash
   def map_hash 
     Hash[ self.map{|k, v| yield(k,v) } ]
@@ -54,8 +32,8 @@ class Hash
 
   # map a hash into a hash recursively. 
   # the mapping function needs to check itself wether or not the value is hash and act appropriately 
-  def map_recursive(&b)
-    Hash[ self.map{|k, v| b.(k, v.is_a?(Hash) ? v.map_recursive(&b) : v) } ]
+  def map_recurse(&b)
+    Hash[ self.map{|k, v| b.(k, v.is_a?(Hash) ? v.map_recurse(&b) : v) } ]
   end
 
   # map a hash into a hash recursively with a seperate key mapping and value mapping function

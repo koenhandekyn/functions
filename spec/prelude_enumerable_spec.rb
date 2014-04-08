@@ -66,7 +66,7 @@ describe "enumerable" do
   it "map_values_recurse" do
     abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
     abcde.map_values_recurse { |x| x*2}.should == {a: 2, b: 4, c: { d: 2, e: 0}}
-    abcde .map_values_recurse { |x| x.even? }.should == {a: false, b: true, c: { d:false, e: true}}
+    abcde.map_values_recurse { |x| x.even? }.should == {a: false, b: true, c: { d:false, e: true}}
   end
 
   it "map_keys" do
@@ -90,9 +90,9 @@ describe "enumerable" do
 
   it "map_recursive" do
     abcde = {a: 1, b: 2, c: { d: 1, e: 0 } }
-    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s, v] : [k.to_s, v*2] }.should == {"a" => 2, "b" => 4, "c" => { "d" => 2, "e" => 0 }}
-    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s[0].ord, v] : [k.to_s[0].ord, v.even?] }.should == {97 => false, 98 => true, 99 => { 100 => false, 101 => true }}
-    abcde.map_recursive { |k,v| v.is_a?(Hash) ? [k.to_s.length, v] : [k.to_s.length, v.even?] }.should == {1 => true, 1 => { 1=>true } }
+    abcde.map_recurse { |k,v| v.is_a?(Hash) ? [k.to_s, v] : [k.to_s, v*2] }.should == {"a" => 2, "b" => 4, "c" => { "d" => 2, "e" => 0 }}
+    abcde.map_recurse { |k,v| v.is_a?(Hash) ? [k.to_s[0].ord, v] : [k.to_s[0].ord, v.even?] }.should == {97 => false, 98 => true, 99 => { 100 => false, 101 => true }}
+    abcde.map_recurse { |k,v| v.is_a?(Hash) ? [k.to_s.length, v] : [k.to_s.length, v.even?] }.should == {1 => true, 1 => { 1=>true } }
   end
 
   it "map_keys_and_values" do
@@ -121,7 +121,7 @@ describe "enumerable" do
     %w(some words are longer then others).grouped_by { |x| x.length > 3 }.should eq([%w(some words longer then others),%w(are)])
   end
 
-  it "multimap" do
+  it "multi_map" do
 
     folders = { 'main[2]' => { 'child[3]' => 'leaf', 'simple' => 'leaf' } }
 

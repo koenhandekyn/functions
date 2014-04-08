@@ -1,3 +1,11 @@
+
+[![Gem Version](https://img.shields.io/gem/v/cmis-ruby.svg)](https://rubygems.org/gems/functions)
+[![Dependency Status](http://img.shields.io/gemnasium/UP-nxt/cmis-ruby.svg)](https://gemnasium.com/koenhandekyn/functions)
+[![Build Status](http://img.shields.io/travis/UP-nxt/cmis-ruby.svg)](https://travis-ci.org/koenhandekyn/functions)
+[![Code Climate](http://img.shields.io/codeclimate/github/UP-nxt/cmis-ruby.svg)](https://codeclimate.com/github/koenhandekyn/functions)
+[![Coverage Status](https://img.shields.io/coveralls/UP-nxt/cmis-ruby.svg)](https://coveralls.io/r/koenhandekyn/functions)
+
+
 # Functional
 
 This library facilitates writing code in a more functional style inside Ruby. 
