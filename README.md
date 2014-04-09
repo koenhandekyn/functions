@@ -1,9 +1,9 @@
 
-[![Gem Version](https://img.shields.io/gem/v/cmis-ruby.svg)](https://rubygems.org/gems/functions)
-[![Dependency Status](http://img.shields.io/gemnasium/UP-nxt/cmis-ruby.svg)](https://gemnasium.com/koenhandekyn/functions)
-[![Build Status](http://img.shields.io/travis/UP-nxt/cmis-ruby.svg)](https://travis-ci.org/koenhandekyn/functions)
-[![Code Climate](http://img.shields.io/codeclimate/github/UP-nxt/cmis-ruby.svg)](https://codeclimate.com/github/koenhandekyn/functions)
-[![Coverage Status](https://img.shields.io/coveralls/UP-nxt/cmis-ruby.svg)](https://coveralls.io/r/koenhandekyn/functions)
+[![Gem Version](https://img.shields.io/gem/v/functions.svg)](https://rubygems.org/gems/functions)
+[![Dependency Status](http://img.shields.io/gemnasium/koenhandekyn/functions.svg)](https://gemnasium.com/koenhandekyn/functions)
+[![Build Status](http://img.shields.io/travis/koenhandekyn/functions.svg)](https://travis-ci.org/koenhandekyn/functions)
+[![Code Climate](http://img.shields.io/codeclimate/github/koenhandekyn/functions.svg)](https://codeclimate.com/github/koenhandekyn/functions)
+[![Coverage Status](https://img.shields.io/coveralls/koenhandekyn/functions.svg)](https://coveralls.io/r/koenhandekyn/functions)
 
 
 # Functional
