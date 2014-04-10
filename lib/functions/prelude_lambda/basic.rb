@@ -8,6 +8,9 @@ module Functions
     # the constant function
     Const = ->(c, x) { c }
 
+    # make a function resilient to nil inputs
+    Maybe = ->(fn) { ->(x) { fn.(x) unless x.nil? } }    
+
     # splits a list xs in peices of size n
     Split_In = ->(n, xs) { xs.each_slice((xs.length+1)/n).to_a }
 
