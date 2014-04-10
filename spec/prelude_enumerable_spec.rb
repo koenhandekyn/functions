@@ -1,4 +1,4 @@
-require 'functions/prelude_enumerable'
+require 'spec_helper'
 
 describe "enumerable" do
 

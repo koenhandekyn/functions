@@ -1,6 +1,4 @@
-require 'functions'
-
-include Functions::Prelude
+require 'spec_helper'
 
 describe Functions::Prelude, "basic" do
 
