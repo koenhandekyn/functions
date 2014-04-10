@@ -125,7 +125,7 @@ describe "enumerable" do
 
     folders = { 'main[2]' => { 'child[3]' => 'leaf', 'simple' => 'leaf' } }
 
-    multiply_folder = -> (k,v) do
+    multiply_folder = ->(k,v) do
       match = k.match(/(.*)\[(\d+)\]/)
       k, count = match ? [match[1], match[2].to_i] : [k, nil]
       if count
