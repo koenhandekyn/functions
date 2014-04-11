@@ -1,0 +1,6 @@
+gem 'functions', path: '..'
+
+group :test do
+  gem 'rake'
+  gem 'rspec'
+end

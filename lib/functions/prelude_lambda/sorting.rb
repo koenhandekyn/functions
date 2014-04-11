@@ -2,18 +2,18 @@ module Functions
 
   module Prelude
 
-    Merge_Sort_By = ->(f, xs) do
+    MergeSortBy = ->(f, xs) do
 
       return xs if xs.length <= 1 # stopcondition
       
-      left, right = Split_In_Half.(xs)
-      Merge_By.(f, Merge_Sort_By.(f, left), Merge_Sort_By.(f, right))
+      left, right = SplitInHalf.(xs)
+      MergeBy.(f, MergeSortBy.(f, left), MergeSortBy.(f, right))
     end
 
-    Merge_Sort = Merge_Sort_By.partial(nil)
+    MergeSort = MergeSortBy.partial(nil)
     # = Merge_Sort_By.partial(Identity)
 
-    Quick_Sort_By = ->(f, list) do
+    QuickSortBy = ->(f, list) do
       
       return [] if list.size == 0
       return list if list.size == 1
@@ -21,10 +21,10 @@ module Functions
       pivot, *xs = *list
       smaller_than = f.nil? ? ->(y) { y < pivot } : ->(y) { f.(y) < f.(pivot) }
       less, more = xs.partition &smaller_than
-      Quick_Sort_By.(f, less) + [pivot] + Quick_Sort_By.(f, more)
+      QuickSortBy.(f, less) + [pivot] + QuickSortBy.(f, more)
     end
 
-    Quick_Sort = Quick_Sort_By.partial(nil)
+    QuickSort = QuickSortBy.partial(nil)
     # = Quick_Sort_By.partial(Identity)
 
   end

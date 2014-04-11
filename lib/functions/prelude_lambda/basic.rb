@@ -12,14 +12,14 @@ module Functions
     Maybe = ->(fn) { ->(x) { fn.(x) unless x.nil? } }    
 
     # splits a list xs in peices of size n
-    Split_In = ->(n, xs) { xs.each_slice((xs.length+1)/n).to_a }
+    SplitIn = ->(n, xs) { xs.each_slice((xs.length+1)/n).to_a }
 
     # splits a list in half
-    Split_In_Half = Split_In.curry.(2)
+    SplitInHalf = SplitIn.curry.(2)
 
     # merges two ordered lists by a function f that compares the values
     # if no function is given the values are compared by the "<" operator
-    Merge_By = ->(f, xs, ys) do
+    MergeBy = ->(f, xs, ys) do
 
       return xs if ys.empty?
       return ys if xs.empty?
@@ -27,13 +27,13 @@ module Functions
       x, *xt = xs
       y, *yt = ys
 
-      return Merge_By.(f, xt, ys) >> x if f.nil? ? x <= y : f.(x) <= f.(y)
-      return Merge_By.(f, xs, yt) >> y
+      return MergeBy.(f, xt, ys) >> x if f.nil? ? x <= y : f.(x) <= f.(y)
+      return MergeBy.(f, xs, yt) >> y
 
     end
 
     # merges two list by the natural comparison operator <
-    Merge = Merge_By.partial(nil)
+    Merge = MergeBy.partial(nil)
 
     # composes two functions
     Compose = ->(f, g, x) { f.(g.(x)) }.curry
@@ -84,17 +84,17 @@ module Functions
 
     Zip = ->(a, b) { a.zip(b) }.curry
 
-    Merge_Hash = ->(as, bs) { as.merge(bs) { |k, a, b| [a, b] } }.curry
+    MergeHash = ->(as, bs) { as.merge(bs) { |k, a, b| [a, b] } }.curry
 
-    Zip_Hash_Left = ->(as, bs) { as.each_with_object({}) { |(k, a), h| h[k] = [a, bs[k]]; h } }.curry
+    ZipHashLeft = ->(as, bs) { as.each_with_object({}) { |(k, a), h| h[k] = [a, bs[k]]; h } }.curry
 
-    Zip_Hash_Inner = ->(as, bs) { as.each_with_object({}) { |(k, a), h| b = bs[k]; h[k] = [a, b] if b; h } }.curry
+    ZipHashInner = ->(as, bs) { as.each_with_object({}) { |(k, a), h| b = bs[k]; h[k] = [a, b] if b; h } }.curry
 
-    Zip_Hash_Right = ->(as, bs) { bs.each_with_object({}) { |(k, b), h| h[k] = [as[k], b]; h } }.curry
+    ZipHashRight = ->(as, bs) { bs.each_with_object({}) { |(k, b), h| h[k] = [as[k], b]; h } }.curry
 
     Map = ->(f, a) { a.map { |x| f.(x) } }.curry
 
-    Map_Hash = ->(f, h) { Hash[h.map{|k, v| [k, f.(v)] }] }.curry     
+    MapHash = ->(f, h) { Hash[h.map{|k, v| [k, f.(v)] }] }.curry     
 
     Filter = ->(f, xs) { xs.select { |x| f.(x) } }.curry
 
@@ -115,7 +115,7 @@ module Functions
 
     FromOneTo = FromTo.(1)
 
-    Count_By = ->(f,a) { a.inject( Hash.new(0) ) { |h,e| h[f.(e)] += 1; h } }.curry
+    CountBy = ->(f,a) { a.inject( Hash.new(0) ) { |h,e| h[f.(e)] += 1; h } }.curry
     # count_by = ->(f) { group_by.( f ) < map_hash.( send.(:length) ) }    
     
     Count = ->(a) { a.inject( Hash.new(0) ) { |h,e| h[e] += 1; h } } # probably a bit faster   

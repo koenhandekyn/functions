@@ -7,14 +7,14 @@ module PreludeLambdaUsage
   Power = ->(p,x) { x**p }.curry
   Square = Power.(2)
   Squares = Map.(Square)
-  Sum_Of_Squares1 = Compose.(Sum).(Squares)
-  Sum_Of_Squares2 = Sum < Squares
-  Sum_Of_Squares = Sum_Of_Squares2
+  SumOfSquares1 = Compose.(Sum).(Squares)
+  SumOfSquares2 = Sum < Squares
+  SumOfSquares = SumOfSquares2
 
-  Inc_With = ->(f, n, m) { n + f.(m) }.curry
-  Sum_Of1 = ->(f,arr) { Foldl.( Inc_With.(f), 0, arr) }.curry
-  Sum_Of2 = ->(f) { ->(arr) { Foldl.( Inc_With.(f), 0, arr) } }
-  Sum_Of = Sum_Of1
+  IncWith = ->(f, n, m) { n + f.(m) }.curry
+  SumOf1 = ->(f,arr) { Foldl.( IncWith.(f), 0, arr) }.curry
+  SumOf2 = ->(f) { ->(arr) { Foldl.( IncWith.(f), 0, arr) } }
+  SumOf = SumOf1
 
   # Average variations
   Average1 = After.( Parallel.(Sum).(Length) ).( Divide )

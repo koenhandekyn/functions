@@ -1,4 +1,6 @@
-require 'examples/prelude_lambda'
+$LOAD_PATH << 'lib'
+
+require_relative '../examples/spec/prelude_lambda_spec'
 
 require 'minitest/autorun'
 require 'minitest/benchmark'

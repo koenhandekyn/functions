@@ -42,18 +42,18 @@ describe Functions::Prelude, "basic" do
   end
 
   it "sorts arrays" do
-    Quick_Sort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
-    Quick_Sort.([1,1,1,1,1,1,1]).should == [1,1,1,1,1,1,1]
-    Merge_Sort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
+    QuickSort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
+    QuickSort.([1,1,1,1,1,1,1]).should == [1,1,1,1,1,1,1]
+    MergeSort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
   end
 
   it "merges hashes" do
     a = { a: 'a', b: 'b' }
     b = { a: '1', c: '3' }
-    Merge_Hash.(a,b).should == { a: ['a','1'], b: 'b', c: '3' }
-    Zip_Hash_Left.(a,b).should == { a: ['a','1'], b: ['b', nil] } 
-    Zip_Hash_Right.(a,b).should == { a: ['a','1'], c: [nil, '3'] } 
-    Zip_Hash_Inner.(a,b).should == { a: ['a','1'] } 
+    MergeHash.(a,b).should == { a: ['a','1'], b: 'b', c: '3' }
+    ZipHashLeft.(a,b).should == { a: ['a','1'], b: ['b', nil] } 
+    ZipHashRight.(a,b).should == { a: ['a','1'], c: [nil, '3'] } 
+    ZipHashInner.(a,b).should == { a: ['a','1'] } 
   end
 
 end

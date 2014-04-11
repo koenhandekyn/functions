@@ -5,8 +5,8 @@ include PreludeLambdaUsage
 describe PreludeLambdaUsage, "basic lambda prelude usage" do
 
   it "sums" do
-    Sum_Of_Squares.([2, 3, 4]).should == 2*2+3*3+4*4
-    Sum_Of.(Square).([2, 3, 1]).should == 2*2+3*3+1*1
+    SumOfSquares.([2, 3, 4]).should == 2*2+3*3+4*4
+    SumOf.(Square).([2, 3, 1]).should == 2*2+3*3+1*1
   end
 
   it "averages" do
