@@ -20,7 +20,7 @@ describe Functions::Prelude, "math" do
   end
 
   it "knows about range building" do
-    FromOneTo.(3).should eq(1..3)
+    expect(FromOneTo.(3)).to eq(1..3)
     FromOneTo.(3).to_a.should eq([1,2,3])
     FromTo.(2).(8).to_a.should eq([2,3,4,5,6,7,8])
   end

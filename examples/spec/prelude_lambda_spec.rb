@@ -24,18 +24,18 @@ describe PreludeLambdaUsage, "basic lambda prelude usage" do
 
   it "knows about GCD alternatives" do
     # test variant implementations
-    Gcd1.(4,8).should == 4
-    Gcd2.(4,8).should == 4
-    GcdA1.([4,8,2]).should eq(2)
-    GcdA2.([4,8,2]).should eq(2)
-    GcdA3.([4,8,2]).should eq(2)
-    GcdA4.([4,8,2]).should eq(2)
+    expect(Gcd1.(4,8)).to == 4
+    expect(Gcd2.(4,8)).to == 4
+    expect(GcdA1.([4,8,2])).to eq(2)
+    expect(GcdA2.([4,8,2])).to eq(2)
+    expect(GcdA3.([4,8,2])).to eq(2)
+    expect(GcdA4.([4,8,2])).to eq(2)
   end
 
   it "knows about LCM variations" do
     # test variant implementations
-    LcmA1.([12,9,2]).should eq(36)
-    LcmA2.([12,9,2]).should eq(36)
+    expect(LcmA1.([12,9,2])).to eq(36)
+    expect(LcmA2.([12,9,2])).to eq(36)
   end
 
 

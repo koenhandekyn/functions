@@ -46,14 +46,6 @@ class Hash
     Hash[ self.map{|k, v| b.(k, ( v.is_a?(Hash) ? v.multi_map(&b) : v) ) }.flatten(1) ]
   end
 
-   # def map_hash &blk
-   #   res = {}
-   #   each do |k,v|
-   #     kk, vv = blk.call(k,v)
-   #     res[kk] = vv
-   #   end
-   #   res
-   # end
 
 end
 
