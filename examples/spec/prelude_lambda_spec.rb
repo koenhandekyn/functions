@@ -5,21 +5,21 @@ include PreludeLambdaUsage
 describe PreludeLambdaUsage, "basic lambda prelude usage" do
 
   it "sums" do
-    SumOfSquares.([2, 3, 4]).should == 2*2+3*3+4*4
-    SumOf.(Square).([2, 3, 1]).should == 2*2+3*3+1*1
+    expect(SumOfSquares.([2, 3, 4])).to eq(2*2+3*3+4*4)
+    expect(SumOf.(Square).([2, 3, 1])).to eq(2*2+3*3+1*1)
   end
 
   it "averages" do
-    Average.([2, 3, 8]).should == 4
+    expect(Average.([2, 3, 8])).to eq(4)
   end
 
   it "flattens" do
-    Flatten.([[1, 2, 3], [2, 3]]).should == [1, 2, 3, 2, 3]
+    expect(Flatten.([[1, 2, 3], [2, 3]])).to eq([1, 2, 3, 2, 3])
   end
 
   it "folds" do
-    Foldl.(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0]).should == 1.0/1.0/2.0/3.0
-    Foldr.(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0]).should == 1.0/3.0/2.0/1.0
+    expect(Foldl.(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0])).to eq(1.0/1.0/2.0/3.0)
+    expect(Foldr.(->(n, a) { n/a }, 1.0, [1.0, 2.0, 3.0])).to eq(1.0/3.0/2.0/1.0)
   end
 
   it "knows about GCD alternatives" do

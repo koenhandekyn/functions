@@ -3,40 +3,40 @@ require 'spec_helper'
 describe Functions::Prelude, "math" do
 
   it "divides" do
-    Divide.([9,2]).should eq(9/2)
-    Divide.([8,2,2]).should eq(8/2/2)
+    expect(Divide.([9,2])).to eq(9/2)
+    expect(Divide.([8,2,2])).to eq(8/2/2)
   end
 
   it "power" do
-    Power.(2,3).should eq(9)
-    Power.(0,3).should eq(1)
-    Power.(3,2).should eq(8)
+    expect(Power.(2,3)).to eq(9)
+    expect(Power.(0,3)).to eq(1)
+    expect(Power.(3,2)).to eq(8)
   end
 
   it "knows about divisors" do
-    IsDivisor.(8,2).should eq(true)
-    IsDivisor.(8,3).should eq(false)
-    Divisors.(12).sort.should eq([1,2,3,4,6,12])
+    expect(IsDivisor.(8,2)).to eq(true)
+    expect(IsDivisor.(8,3)).to eq(false)
+    expect(Divisors.(12).sort).to eq([1,2,3,4,6,12])
   end
 
   it "knows about range building" do
     expect(FromOneTo.(3)).to eq(1..3)
-    FromOneTo.(3).to_a.should eq([1,2,3])
-    FromTo.(2).(8).to_a.should eq([2,3,4,5,6,7,8])
+    expect(FromOneTo.(3).to_a).to eq([1,2,3])
+    expect(FromTo.(2).(8).to_a).to eq([2,3,4,5,6,7,8])
   end
 
   it "knows about gcd" do
-    Gcd.(12,9).should eq(3)
-    Gcd.(4,8).should eq(4)
-    GcdA.([12,9,6]).should eq(3)
-    GcdA.([4,8,2]).should eq(2)
+    expect(Gcd.(12,9)).to eq(3)
+    expect(Gcd.(4,8)).to eq(4)
+    expect(GcdA.([12,9,6])).to eq(3)
+    expect(GcdA.([4,8,2])).to eq(2)
   end
 
   it "knows about lcm" do
-    Lcm.(12,9).should eq(36)
-    Lcm.(6,8).should eq(24)
-    LcmA.([12,9]).should eq(36)
-    LcmA.([12,9,2]).should eq(36)
+    expect(Lcm.(12,9)).to eq(36)
+    expect(Lcm.(6,8)).to eq(24)
+    expect(LcmA.([12,9])).to eq(36)
+    expect(LcmA.([12,9,2])).to eq(36)
   end
 
 end

@@ -8,7 +8,7 @@ describe Functions::Prelude, "basic" do
 
   it "composes" do
     sum_of_squares = Compose.(Sum).(Squares)
-    sum_of_squares.([2, 3, 4]).should eq(4+9+16)
+    expect(sum_of_squares.([2, 3, 4])).to eq(4+9+16)
   end
 
   it "has a compose operator" do
@@ -24,7 +24,7 @@ describe Functions::Prelude, "basic" do
 
   it "composes using after with implicit parallel" do
     average = After.([Sum, Length]).(Divide)
-    average.([2, 3, 8]).should eq((2+3+8)/3)
+    expect(average.([2, 3, 8])).to eq((2+3+8)/3)
   end
 
   it "mixes parallel with after operator" do
@@ -34,26 +34,26 @@ describe Functions::Prelude, "basic" do
 
   it "mixes par with after operator" do
     average = Par.([Sum, Length]) > Divide
-    average.([2, 3, 8]).should eq((2+3+8)/3)
+    expect(average.([2, 3, 8])).to eq((2+3+8)/3)
   end
 
   it "flattens arrays" do
-    Flatten.([[1, 2, 3], [2, 3]]).should eq([1,2,3,2,3])
+    expect(Flatten.([[1, 2, 3], [2, 3]])).to eq([1,2,3,2,3])
   end
 
   it "sorts arrays" do
-    QuickSort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
-    QuickSort.([1,1,1,1,1,1,1]).should == [1,1,1,1,1,1,1]
-    MergeSort.([3,3,5,6,7,1,2]).should == [1,2,3,3,5,6,7]
+    expect(QuickSort.([3,3,5,6,7,1,2])).to eq([1,2,3,3,5,6,7])
+    expect(QuickSort.([1,1,1,1,1,1,1])).to eq([1,1,1,1,1,1,1])
+    expect(MergeSort.([3,3,5,6,7,1,2])).to eq([1,2,3,3,5,6,7])
   end
 
   it "merges hashes" do
     a = { a: 'a', b: 'b' }
     b = { a: '1', c: '3' }
-    MergeHash.(a,b).should == { a: ['a','1'], b: 'b', c: '3' }
-    ZipHashLeft.(a,b).should == { a: ['a','1'], b: ['b', nil] } 
-    ZipHashRight.(a,b).should == { a: ['a','1'], c: [nil, '3'] } 
-    ZipHashInner.(a,b).should == { a: ['a','1'] } 
+    expect(MergeHash.(a,b)).to eq({ a: ['a','1'], b: 'b', c: '3' })
+    expect(ZipHashLeft.(a,b)).to eq({ a: ['a','1'], b: ['b', nil] })
+    expect(ZipHashRight.(a,b)).to eq({ a: ['a','1'], c: [nil, '3'] })
+    expect(ZipHashInner.(a,b)).to eq({ a: ['a','1'] })
   end
 
 end
