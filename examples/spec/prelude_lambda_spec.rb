@@ -24,8 +24,8 @@ describe PreludeLambdaUsage, "basic lambda prelude usage" do
 
   it "knows about GCD alternatives" do
     # test variant implementations
-    expect(Gcd1.(4,8)).to == 4
-    expect(Gcd2.(4,8)).to == 4
+    expect(Gcd1.(4,8)).to eq(4)
+    expect(Gcd2.(4,8)).to eq(4)
     expect(GcdA1.([4,8,2])).to eq(2)
     expect(GcdA2.([4,8,2])).to eq(2)
     expect(GcdA3.([4,8,2])).to eq(2)
