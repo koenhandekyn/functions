@@ -12,7 +12,9 @@ module Functions
 
     Divide = ->(arr) { arr.inject(:/) }
 
-    Average = Parallel.(Sum,Length) > Divide
+    To_Float = Send.(:to_f)
+
+    Average = Parallel.(Sum,Length) > Map.( To_Float ) > Divide
 
     Power = ->(p,x) { x**p }.curry
 
