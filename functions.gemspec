@@ -8,10 +8,10 @@ Gem::Specification.new do |gem|
   gem.version       = Functions::VERSION
   gem.authors       = ["Koen Handekyn"]
   gem.email         = ["koen.handekyn@up-nxt.com"]
-  gem.description   = %q{functional programming in ruby}
+  gem.description   = %q{A prelude library that belongs to the book "functional programming in ruby".}
   gem.summary       = %q{functional programming in ruby}
   gem.homepage      = "https://github.com/koenhandekyn/functions"
-  gem.license       = 'AGPL'
+  gem.license       = 'LGPL-3.0+'
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})

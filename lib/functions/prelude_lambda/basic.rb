@@ -41,7 +41,8 @@ module Functions
     # manually curried version of the Compose function
     ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
 
-    Chain = ->(*fns) { fns.reduce { |f, g| lambda { |x| f.(g.(x)) } } }
+    # reduce a list of functions right to left
+    Chain = ->(*fns) { fns.reduce { |f, g| ->(x) { f.(g.(x)) } } }
 
     # composes two functions in reverse sequence
     After = ->(f, g, x) {
@@ -100,7 +101,7 @@ module Functions
 
     Filter = ->(f, xs) { xs.select { |x| f.(x) } }.curry
 
-    Parallel = ->(f, g, x) { [f.(x), g.(x)] }.curry
+    Pair = Parallel = ->(f, g, x) { [f.(x), g.(x)] }.curry
 
     Par = ->(fs, x) { fs.map { |f| f.(x) } }.curry
 
