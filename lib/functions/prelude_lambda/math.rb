@@ -2,6 +2,8 @@ module Functions
 
   module Prelude
 
+    To_Float = Send.(:to_f)
+
     Max = Send.(:max)
 
     Min = Send.(:min)
@@ -11,8 +13,6 @@ module Functions
     Multiply = ->(arr) { arr.inject(1, :*) }
 
     Divide = ->(arr) { arr.inject(:/) }
-
-    To_Float = Send.(:to_f)
 
     Average = Parallel.(Sum,Length) > Map.( To_Float ) > Divide
 
