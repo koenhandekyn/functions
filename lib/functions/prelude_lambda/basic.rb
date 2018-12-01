@@ -18,7 +18,6 @@ module Functions
     SplitInHalf = SplitIn.curry.(2)
 
     # merges two ordered lists by a function f that compares the values
-    # if no function is given the values are compared by the "<" operator
     MergeBy = ->(f, xs, ys) do
 
       return xs if ys.empty?
@@ -27,13 +26,16 @@ module Functions
       x, *xt = xs
       y, *yt = ys
 
-      return MergeBy.(f, xt, ys) >> x if f.nil? ? x <= y : f.(x) <= f.(y)
-      return MergeBy.(f, xs, yt) >> y
+      if f.(x) <= f.(y)
+        return MergeBy.(f, xt, ys) >> x
+      else
+        return MergeBy.(f, xs, yt) >> y
+      end
 
     end
 
     # merges two list by the natural comparison operator <
-    Merge = MergeBy.partial(nil)
+    Merge = MergeBy.partial(Id)
 
     # composes two functions
     Compose = ->(f, g, x) { f.(g.(x)) }.curry
