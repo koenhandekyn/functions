@@ -22,9 +22,7 @@ module PreludeLambdaUsage
   Average3 = After.( [Sum,Length] ).( Divide )
 
   # Gcd variations
-  Gcd1 = ->(a, b) {
-    (1..[a,b].min).select { |c| a % c == 0 && b % c == 0 }.max
-  }
+  Gcd1 = ->(a, b) { (1..[a,b].min).select { |c| a % c == 0 && b % c == 0 }.max }
   Gcd2 = ->(a,b) { (Divisors.(a) & Divisors.(b)).max }
 
   # GcdA variations
@@ -36,7 +34,6 @@ module PreludeLambdaUsage
   Common = Intersect
   Dividers = Map.(Divisors)
   GcdA4 = Greatest < Common < Dividers
-
 
   # LcmA variations
   LcmA1 = ->(arr) { arr.inject { |a, r| Lcm.(a, r) } } # the lcm of an array as an iteration of the lcm over the elements

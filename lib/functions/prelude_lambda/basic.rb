@@ -9,7 +9,7 @@ module Functions
     Const = ->(c, x) { c }
 
     # make a function resilient to nil inputs
-    Maybe = ->(fn) { ->(x) { fn.(x) unless x.nil? } }    
+    Maybe = ->(fn) { ->(x) { fn.(x) unless x.nil? } }
 
     # splits a list xs in peices of size n
     SplitIn = ->(n, xs) { xs.each_slice((xs.length+1)/n).to_a }
@@ -40,6 +40,8 @@ module Functions
 
     # manually curried version of the Compose function
     ComposeCurried = ->(f) { ->(g) { ->(x) { f.(g.(x)) } } }
+
+    Chain = ->(*fns) { fns.reduce { |f, g| lambda { |x| f.(g.(x)) } } }
 
     # composes two functions in reverse sequence
     After = ->(f, g, x) {
@@ -94,7 +96,7 @@ module Functions
 
     Map = ->(f, a) { a.map { |x| f.(x) } }.curry
 
-    MapHash = ->(f, h) { Hash[h.map{|k, v| [k, f.(v)] }] }.curry     
+    MapHash = ->(f, h) { Hash[h.map{|k, v| [k, f.(v)] }] }.curry
 
     Filter = ->(f, xs) { xs.select { |x| f.(x) } }.curry
 
@@ -104,21 +106,21 @@ module Functions
 
     Intersect = ->(as) { as.inject(:&) }
 
-    Group = ->(f,a) { a.group_by(&f) }.curry 
+    Group = ->(f,a) { a.group_by(&f) }.curry
 
     Values = Send.(:values)
 
     # TODO investigate semantics
-    Partition = ->(f) { Group.(f) > Values } 
+    Partition = ->(f) { Group.(f) > Values }
 
     FromTo = ->(from) { ->(to) { Range.new(from, to) } }
 
     FromOneTo = FromTo.(1)
 
     CountBy = ->(f,a) { a.inject( Hash.new(0) ) { |h,e| h[f.(e)] += 1; h } }.curry
-    # count_by = ->(f) { group_by.( f ) < map_hash.( send.(:length) ) }    
-    
-    Count = ->(a) { a.inject( Hash.new(0) ) { |h,e| h[e] += 1; h } } # probably a bit faster   
+    # count_by = ->(f) { group_by.( f ) < map_hash.( send.(:length) ) }
+
+    Count = ->(a) { a.inject( Hash.new(0) ) { |h,e| h[e] += 1; h } } # probably a bit faster
     # count = count_by.(identity) # alternative definition (generic)
 
   end
